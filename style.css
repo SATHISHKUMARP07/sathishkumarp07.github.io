@@ -1160,3 +1160,53 @@ footer {
         height: 45px;
     }
 }
+
+/*--------------------------------------------------------------
+# Magnetic Glow Effect (MNC Grade)
+--------------------------------------------------------------*/
+.project-card,
+.text-card,
+.skill-category,
+.contact-method-card,
+.edu-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before,
+.text-card::before,
+.skill-category::before,
+.contact-method-card::before,
+.edu-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
+            rgba(255, 255, 255, 0.08),
+            transparent 40%);
+    z-index: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    opacity: 0;
+}
+
+.project-card:hover::before,
+.text-card:hover::before,
+.skill-category:hover::before,
+.contact-method-card:hover::before,
+.edu-card:hover::before {
+    opacity: 1;
+}
+
+/* Elevate content above glow */
+.project-card>*,
+.text-card>*,
+.skill-category>*,
+.contact-method-card>*,
+.edu-card>* {
+    position: relative;
+    z-index: 1;
+}
