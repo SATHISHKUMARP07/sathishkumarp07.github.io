@@ -205,39 +205,41 @@ document.addEventListener('DOMContentLoaded', () => {
     --------------------------------------------------------------*/
     const cards = document.querySelectorAll('.project-card, .text-card, .skill-category, .contact-method-card, .edu-card');
 
-    cards.forEach(card => {
-        card.addEventListener('mousemove', e => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+    if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
 
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
 
-            // 3D Tilt calculations
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -5;
-            const rotateY = ((x - centerX) / centerX) * 5;
+                // 3D Tilt calculations
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -5;
+                const rotateY = ((x - centerX) / centerX) * 5;
 
-            if (card.classList.contains('project-card') || card.classList.contains('edu-card') || card.classList.contains('text-card')) {
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-            }
+                if (card.classList.contains('project-card') || card.classList.contains('edu-card') || card.classList.contains('text-card')) {
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                }
+            });
+
+            card.addEventListener('mouseleave', () => {
+                if (card.classList.contains('project-card') || card.classList.contains('edu-card') || card.classList.contains('text-card')) {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                    card.style.transition = 'transform 0.5s ease';
+                }
+            });
+
+            card.addEventListener('mouseenter', () => {
+                if (card.classList.contains('project-card') || card.classList.contains('edu-card') || card.classList.contains('text-card')) {
+                    card.style.transition = 'none';
+                }
+            });
         });
-
-        card.addEventListener('mouseleave', () => {
-            if (card.classList.contains('project-card') || card.classList.contains('edu-card') || card.classList.contains('text-card')) {
-                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
-                card.style.transition = 'transform 0.5s ease';
-            }
-        });
-
-        card.addEventListener('mouseenter', () => {
-            if (card.classList.contains('project-card') || card.classList.contains('edu-card') || card.classList.contains('text-card')) {
-                card.style.transition = 'none';
-            }
-        });
-    });
+    }
 
     /*--------------------------------------------------------------
     # Scroll Progress Bar
