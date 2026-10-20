@@ -41,6 +41,22 @@ a {
     -webkit-tap-highlight-color: transparent;
 }
 
+.skip-link {
+    position: fixed;
+    z-index: 1200;
+    top: 12px;
+    left: 12px;
+    padding: 10px 14px;
+    transform: translateY(-160%);
+    background: var(--green);
+    color: white;
+    font-weight: 700;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
 img {
     display: block;
     max-width: 100%;
@@ -218,6 +234,12 @@ h3 {
     color: #57625c;
     font-size: clamp(1rem, 1.3vw, 1.14rem);
     line-height: 1.8;
+}
+
+.hero-location {
+    margin: -12px 0 25px;
+    color: var(--muted);
+    font-size: 0.8rem;
 }
 
 .hero-actions,
@@ -773,6 +795,10 @@ h3 {
     border-top: 1px solid var(--line);
 }
 
+.skill-group:last-child {
+    grid-column: 1 / -1;
+}
+
 .skill-group h3 {
     margin-bottom: 16px;
     font-size: 1rem;
@@ -1084,6 +1110,10 @@ h3 {
         max-width: 580px;
     }
 
+    .hero-location {
+        margin-top: -15px;
+    }
+
     .hero-facts {
         margin-top: 38px;
     }
@@ -1262,6 +1292,10 @@ h3 {
 
     .skills-layout {
         grid-template-columns: 1fr;
+    }
+
+    .skill-group:last-child {
+        grid-column: auto;
     }
 
     .school-education {
